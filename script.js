@@ -54,21 +54,20 @@ function playGame() {
   while (isInvalidRoundsValue);
 
   for (let i = 1; i <= rounds; i++) {
-   console.log(`Round ${i} -> Player: ${playerScore}, Computer: ${computerScore}`);
-   console.log("Rock, Paper or Scissors?");
-   let playerSelection = prompt("Rock, Paper or Scissors?");
-   playerSelection =  playerSelection[0].toUpperCase() + playerSelection.substring(1).toLowerCase();
-   console.log(`You chooose ${playerSelection}.`);
-   let computerSelection = getComputerSelection();
-   console.log(`The computer chooose ${computerSelection}.`);
-   let result = playRound(playerSelection,computerSelection); 
-   if (result.includes(`Win`)) {
-    playerScore++;
-   } else if (result.includes(`Lose`)) {
-    computerScore++;
-   }
-   console.log(result);
-
+    console.log(`Round ${i} -> Player: ${playerScore}, Computer: ${computerScore}`);
+    console.log("Rock, Paper or Scissors?");
+    let playerSelection = prompt("Rock, Paper or Scissors?");
+    playerSelection =  playerSelection[0].toUpperCase() + playerSelection.substring(1).toLowerCase();
+    console.log(`You chooose ${playerSelection}.`);
+    let computerSelection = getComputerSelection();
+    console.log(`The computer chooose ${computerSelection}.`);
+    let result = playRound(playerSelection,computerSelection); 
+    if (result.includes(`Win`)) {
+      playerScore++;
+    } else if (result.includes(`Lose`)) {
+      computerScore++;
+    }
+    console.log(result);
   }
 
   console.log(`The final score is Player: ${playerScore}, Computer: ${computerScore}`);
