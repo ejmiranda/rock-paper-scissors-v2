@@ -1,3 +1,33 @@
+const areas = document.querySelectorAll('.area');
+const startBtn = document.getElementById('start-btn');
+const roundTitle = document.getElementById('round-title');
+let currentRound = 0;
+let totalRounds = 0; 
+
+startBtn.addEventListener('click', (event) => {
+  totalRounds = document.querySelector('select').value;
+  enableArea('round-area');
+  updateRound();
+});
+
+function enableArea(selectedArea) {
+  areas.forEach(area => {
+    if (area.getAttribute('id') === selectedArea) {
+      area.classList.remove('off');
+    } else {
+      area.classList.add('off');
+    }
+  });
+}
+
+function updateRound() {
+  currentRound++;
+  if (currentRound <= totalRounds) {
+    roundTitle.textContent = `Round ${currentRound} of ${totalRounds}`;
+  } else {
+    enableArea('game-over-area');
+  }
+}
 
 function getComputerSelection() {
   const computerChoices = [`Rock`, `Paper`, `Scissors`];

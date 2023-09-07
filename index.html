@@ -3,10 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rock Paper Scissors</title>
-  <script src="script.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <title>Rock Paper Scissors v2</title>
 </head>
 <body>
-  
+  <div class="container">
+    <h1>Rock, Paper Scissors</h1>
+    <div class="stage">
+      
+      <div id="intro-area" class="area">
+        <h2 class="title">Welcome</h2>
+        <label for="round-qty">How many rounds do you want to play?</label>
+        <select name="rounds" id="round-qty">
+          <option value="1">1</option>
+          <option value="3">3</option>
+          <option value="5">5</option>
+        </select>
+        <button id="start-btn">Start</button>
+      </div>
+
+      <div id="round-area" class="area off">
+        <h2 id="round-title" class="title">Round</h2>
+        <button id="rock" class="option">Rock</button>
+        <button id="paper" class="option">Paper</button>
+        <button id="scissors" class="option">Scissors</button>
+      </div>
+
+      <div id="game-over-area" class="area off">
+        <h2 class="game-over-title">Game Over</h2>
+      </div>
+
+    </div>
+  </div>
 </body>
 </html>
