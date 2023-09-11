@@ -1,0 +1,125 @@
+.stage {
+  font-family: 'Lobster', cursive;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stage-title {
+  font-size: 100px;
+  margin: 30px auto;
+}
+
+.act {
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.act-title {
+  font-size: 36px;
+  margin: 10px auto;
+}
+
+.selector {
+  margin: 15px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  font-size: 22px;
+}
+
+select {
+  font-size: 16px;
+  margin: 10px auto;
+  width: 50px;
+}
+
+button {
+  cursor: pointer;
+}
+
+#start,
+#play-again {
+  background-color: salmon;
+  color: white;
+  font-size: 22px;
+  padding: 10px 50px;
+}
+
+#start:hover,
+#play-again:hover {
+  background-color: #0591AF;
+}
+
+#options {
+  margin: 10px;
+}
+
+.option {
+  background-color: white;
+  border: none;
+  border-radius: 0;
+  height: auto;
+  margin: 0 10px;
+  padding: 0;
+}
+
+.option:hover:enabled {
+  background-color: white;
+  transform: scale(1.1)
+}
+
+.option:disabled {
+  cursor: default;
+  opacity: .5;
+}
+
+img {
+  height: 140px;
+}
+
+.selected {
+  background-color: salmon; 
+}
+
+.act-subtitle {
+  margin: 2px auto;
+}
+
+#next {
+  background-color: lightgray;
+  border: 1px solid darkgray;
+  border-radius: 4px;
+  margin: 10px auto;
+  padding: 10px 30px;
+}
+
+#next:hover {
+  background-color: darkgray;
+}
+
+#final-result {
+  font-size: 48px; 
+  margin: 15px auto 30px auto; 
+}
+
+.win {
+  color: green;
+}
+
+.lost {
+  color: red;
+}
+
+#play-again {
+  margin: 30px auto;
+}
+
+.off {
+  display: none;
+}

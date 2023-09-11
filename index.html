@@ -3,8 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="stylesheets/reset.css">
+  <link rel="stylesheet" href="stylesheets/style.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+  <script src="scripts/script.js" defer></script>
   <title>Rock Paper Scissors v2</title>
 </head>
 <body>
@@ -12,20 +19,30 @@
     <h1 class="stage-title">Rock Paper Scissors</h1>
     <div id="opening" class="act">
       <h2 id="opening-act-title" class="act-title">Welcome</h2>
-      <label for="round-qty">How many rounds do you want to play?</label>
-      <select name="rounds-qty-selector" id="round-qty-selector">
-        <option value="1">1</option>
-        <option value="3">3</option>
-        <option value="5">5</option>
-      </select>
+      <div class="selector">
+        <label for="round-qty">How many rounds do you want to play?</label>
+        <select name="rounds-qty-selector" id="round-qty-selector">
+          <option value="1">1</option>
+          <option value="3">3</option>
+          <option value="5">5</option>
+        </select>
+      </div>
       <button id="start">Start</button>
     </div>
     <div id="main" class="act off">
       <h2 id="main-act-title" class="act-title">Round 1 of 1</h2>
-      <button id="rock" class="option">Rock</button>
-      <button id="paper" class="option">Paper</button>
-      <button id="scissors" class="option">Scissors</button>
-      <p id="computer-selection" class="act-substitle off"></p>
+      <div id="options">
+        <button class="option">
+          <img id="rock" src="media/rock.jpg" alt="Rock">
+        </button>
+        <button class="option">
+          <img id="paper" src="media/paper.jpg" alt="Paper">
+        </button>
+        <button class="option">
+          <img id="scissors" src="media/scissors.jpg" alt="Scissors">
+        </button>
+      </div>
+      <p id="computer-selection" class="act-subtitle off"></p>
       <p id="round-result" class="act-subtitle off"></p>
       <p id="round-score" class="act-subtitle off">Player: 0, Computer: 0</p>
       <button id="next" class="off">Next</button>
