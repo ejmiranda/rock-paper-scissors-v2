@@ -1,102 +1,83 @@
-const areas = document.querySelectorAll('.area');
-const startBtn = document.getElementById('start-btn');
-const roundTitle = document.getElementById('round-title');
-const options = document.querySelectorAll('.option');
+const acts = document.querySelectorAll('.act');
+const roundTitle = document.getElementById('main-act-title');
 const compSelection = document.getElementById('computer-selection');
 const roundResult = document.getElementById('round-result');
 const roundScore = document.getElementById('round-score');
-const nextBtn = document.getElementById('next-btn');
-const gameOverArea = document.getElementById('game-over-area');
 const finalResult = document.getElementById('final-result');
 const finalScore = document.getElementById('final-score');
-const playAgainBtn = document.getElementById('play-again');
-let currentRound = 0;
-let totalRounds = 0;
-let playerScore = 0;
-let computerScore = 0;
 
-startBtn.addEventListener('click', (event) => {
-  totalRounds = document.querySelector('select').value;
-  enableArea('round-area');
-  prepareRound();
+const startBtn = document.getElementById('start');
+const options = document.querySelectorAll('.option');
+const nextBtn = document.getElementById('next');
+const playAgainBtn = document.getElementById('play-again');
+
+let currentRound;
+let totalRounds;
+let playerScore;
+let computerScore;
+let computerSelection;
+
+startBtn.addEventListener('click', () => {
+  let rounds = document.getElementById('round-qty-selector').value;
+  startGame(rounds);
 });
 
-function enableArea(selectedArea) {
-  areas.forEach(area => {
-    if (area.getAttribute('id') === selectedArea) {
-      area.classList.remove('off');
-    } else {
-      area.classList.add('off');
-    }
+options.forEach(option => {
+  option.addEventListener('click', (event) => {
+    toggleSelection(event.target);
+    toggleOptions();
+    let playerSelection = event.target.getAttribute('id');
+    playRound(playerSelection);
   });
+});
+
+nextBtn.addEventListener('click', () => {
+  toggleSelection();
+  toggleOptions();
+  startRound();
+});
+
+playAgainBtn.addEventListener('click', () => {
+  setStage('opening');
+});
+
+function startGame(rounds) {
+  setStage('main');
+  currentRound = 0;
+  totalRounds = rounds;
+  playerScore = 0;
+  computerScore = 0;
+  startRound();
 }
 
-function prepareRound() {
+function finishGame() {
+  setStage('closing');
+  if (playerScore > computerScore) {
+    finalResult.textContent = 'You won the game!';
+  } else if (playerScore < computerScore) {
+    finalResult.textContent = 'You lost the game.';
+  } else {
+    finalResult.textContent = 'The game is a tie!';
+  }
+  finalScore.textContent = `Player: ${playerScore}, Computer: ${computerScore}`;
+}
+
+function startRound() {
   currentRound++;
   if (currentRound <= totalRounds) {
     roundTitle.textContent = `Round ${currentRound} of ${totalRounds}`;
-    removeOptionSelection();
     compSelection.classList.add('off');
     roundResult.classList.add('off');
     nextBtn.classList.add('off');
   } else {
-    enableArea('game-over-area');
-    if (playerScore > computerScore) {
-      finalResult.textContent = 'You won the game!';
-    } else if (playerScore < computerScore) {
-      finalResult.textContent = 'You lost the game.';
-    } else {
-      finalResult.textContent = 'The game is a tie!';
-    }
-    finalScore.textContent = roundScore.textContent;
+    roundScore.classList.add('off');
+    finishGame();
   }
 }
 
-options.forEach(option => {
-  option.addEventListener('click', event => {
-   console.log(event.target)
-    event.target.classList.add('selected');
-    toggleOptionsBtns();
-    let playerSelection = event.target.getAttribute('id');
-    let computerSelection = getComputerSelection();
-    playRound(playerSelection, computerSelection);
-  });
-})
-
-nextBtn.addEventListener('click', (event) => {
-  toggleOptionsBtns();
-  prepareRound();
-});
-
-playAgainBtn.addEventListener('click', (event) => {
-  currentRound = 0;
-  totalRounds = 0;
-  playerScore = 0;
-  computerScore = 0;
-  enableArea('intro-area');
-  document.querySelector('select').selectedIndex = 0;
-  roundScore.classList.add('off')
-});
-
-function toggleOptionsBtns() {
-  options.forEach(option => {
-    if (option.disabled === true) {
-      option.disabled = false;
-    } else {
-      option.disabled = true;
-    }
-  });
-}
-
-function getComputerSelection() {
-  const computerChoices = [`rock`, `paper`, `scissors`];
-  return computerChoices[Math.floor(Math.random() * 3)];
-}
-
-function playRound(playerSelection, computerSelection) {
-  compSelection.classList.remove('off');
-  compSelection.textContent = `The computer picked ${computerSelection}.`;
+function playRound(playerSelection) {
   let resultText = '';
+  computerSelection = getComputerSelection();
   if (playerSelection == 'rock' && computerSelection == 'rock') {
     resultText = 'It\'s a Tie!';
   } else if (playerSelection == 'rock' && computerSelection == 'paper') {
@@ -121,9 +102,47 @@ function playRound(playerSelection, computerSelection) {
   } else if (resultText.includes('Lose')) {
     computerScore++;
   }
+  finishRound(resultText);
+}
+
+function finishRound(resultText) {
+  compSelection.classList.remove('off');
+  compSelection.textContent = `The computer picked ${computerSelection}.`;
   roundResult.classList.remove('off');
   roundResult.textContent = resultText;
   roundScore.classList.remove('off');
   roundScore.textContent = `Player: ${playerScore}, Computer: ${computerScore}`;
   nextBtn.classList.remove('off');
+}
+
+function setStage(nextAct) {
+  acts.forEach(act => {
+    if (act.getAttribute('id') === nextAct) {
+      act.classList.remove('off');
+    } else {
+      act.classList.add('off');
+    }
+  });
+}
+
+function toggleSelection(selection) {
+  options.forEach(option => {
+    if (option === selection) {
+      option.classList.add('selected');
+      return;
+    } else {
+      option.classList.remove('selected');
+    }
+  });  
+}
+
+function toggleOptions() {
+  options.forEach(option => {
+    option.disabled = !option.disabled;
+  });
+}
+
+function getComputerSelection() {
+  const computerChoices = [`rock`, `paper`, `scissors`];
+  return computerChoices[Math.floor(Math.random() * 3)];
 }

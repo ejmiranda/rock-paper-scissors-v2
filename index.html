@@ -8,35 +8,33 @@
   <title>Rock Paper Scissors v2</title>
 </head>
 <body>
-  <div class="container">
-    <h1>Rock Paper Scissors</h1>
-    <div class="stage">
-      <div id="intro-area" class="area">
-        <h2 class="title">Welcome</h2>
-        <label for="round-qty">How many rounds do you want to play?</label>
-        <select name="rounds" id="round-qty">
-          <option value="1">1</option>
-          <option value="3">3</option>
-          <option value="5">5</option>
-        </select>
-        <button id="start-btn">Start</button>
-      </div>
-      <div id="round-area" class="area off">
-        <h2 id="round-title" class="title">Round</h2>
-        <button id="rock" class="option">Rock</button>
-        <button id="paper" class="option">Paper</button>
-        <button id="scissors" class="option">Scissors</button>
-        <p id="computer-selection" class="off"></p>
-        <p id="round-result" class="result off"></p>
-        <p id="round-score" class=" score off">Player: 0, Computer: 0</p>
-        <button id="next-btn" class="off">Next</button>
-      </div>
-      <div id="game-over-area" class="area off">
-        <h2 class="game-over-title">Game Over</h2>
-        <p id="final-result" class="result"></p>
-        <p id="final-score" class="score"></p>
-        <button id="play-again">Play Again</button>
-      </div>
+  <div class="stage">
+    <h1 class="stage-title">Rock Paper Scissors</h1>
+    <div id="opening" class="act">
+      <h2 id="opening-act-title" class="act-title">Welcome</h2>
+      <label for="round-qty">How many rounds do you want to play?</label>
+      <select name="rounds-qty-selector" id="round-qty-selector">
+        <option value="1">1</option>
+        <option value="3">3</option>
+        <option value="5">5</option>
+      </select>
+      <button id="start">Start</button>
+    </div>
+    <div id="main" class="act off">
+      <h2 id="main-act-title" class="act-title">Round 1 of 1</h2>
+      <button id="rock" class="option">Rock</button>
+      <button id="paper" class="option">Paper</button>
+      <button id="scissors" class="option">Scissors</button>
+      <p id="computer-selection" class="act-substitle off"></p>
+      <p id="round-result" class="act-subtitle off"></p>
+      <p id="round-score" class="act-subtitle off">Player: 0, Computer: 0</p>
+      <button id="next" class="off">Next</button>
+    </div>
+    <div id="closing" class="act off">
+      <h2 id="closing-act-title" class="act-title">Game Over</h2>
+      <p id="final-result" class="act-subtitle"></p>
+      <p id="final-score" class="act-subtitle"></p>
+      <button id="play-again">Play Again</button>
     </div>
   </div>
 </body>
