@@ -1,6 +1,6 @@
 # Rock Paper Scissors v2
 
-![Rock Paper Scissors Screenshot](https://github.com/ejmiranda/rock-paper-scissors-v2/blob/main/meta/screenshot.PNG)
+![Rock Paper Scissors Screenshot](https://github.com/ejmiranda/rock-paper-scissors-v2/blob/main/meta/screenshot.png)
 
 **[View Live](https://ejmiranda.github.io/rock-paper-scissors-v2/)**
 
