@@ -21,32 +21,6 @@ startBtn.addEventListener('click', (event) => {
   prepareRound();
 });
 
-options.forEach(option => {
-  option.addEventListener('click', event => {
-   console.log(event.target)
-    event.target.classList.add('selected');
-    toggleOptionsBtns();
-    let playerSelection = event.target.getAttribute('id');
-    let computerSelection = getComputerSelection();
-    playRound(playerSelection, computerSelection);
-  });
-})
-
-nextBtn.addEventListener('click', (event) => {
-  toggleOptionsBtns();
-  prepareRound();
-});
-
-playAgainBtn.addEventListener('click', (event) => {
-  currentRound = 0;
-  totalRounds = 0;
-  playerScore = 0;
-  computerScore = 0;
-  enableArea('intro-area');
-  document.querySelector('select').selectedIndex = 0;
-  roundScore.classList.add('off')
-});
-
 function enableArea(selectedArea) {
   areas.forEach(area => {
     if (area.getAttribute('id') === selectedArea) {
@@ -78,11 +52,31 @@ function prepareRound() {
   }
 }
 
-function removeOptionSelection() {
-  options.forEach(option => {
-    option.classList.remove('selected');
+options.forEach(option => {
+  option.addEventListener('click', event => {
+   console.log(event.target)
+    event.target.classList.add('selected');
+    toggleOptionsBtns();
+    let playerSelection = event.target.getAttribute('id');
+    let computerSelection = getComputerSelection();
+    playRound(playerSelection, computerSelection);
   });
-}
+})
+
+nextBtn.addEventListener('click', (event) => {
+  toggleOptionsBtns();
+  prepareRound();
+});
+
+playAgainBtn.addEventListener('click', (event) => {
+  currentRound = 0;
+  totalRounds = 0;
+  playerScore = 0;
+  computerScore = 0;
+  enableArea('intro-area');
+  document.querySelector('select').selectedIndex = 0;
+  roundScore.classList.add('off')
+});
 
 function toggleOptionsBtns() {
   options.forEach(option => {
