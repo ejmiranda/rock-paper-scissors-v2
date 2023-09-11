@@ -9,9 +9,8 @@
 </head>
 <body>
   <div class="container">
-    <h1>Rock, Paper Scissors</h1>
+    <h1>Rock Paper Scissors</h1>
     <div class="stage">
-      
       <div id="intro-area" class="area">
         <h2 class="title">Welcome</h2>
         <label for="round-qty">How many rounds do you want to play?</label>
@@ -22,25 +21,22 @@
         </select>
         <button id="start-btn">Start</button>
       </div>
-
       <div id="round-area" class="area off">
         <h2 id="round-title" class="title">Round</h2>
         <button id="rock" class="option">Rock</button>
         <button id="paper" class="option">Paper</button>
         <button id="scissors" class="option">Scissors</button>
         <p id="computer-selection" class="off"></p>
-        <p id="result" class="off"></p>
-        <p id="score" class="off">Player: 0, Computer: 0</p>
+        <p id="round-result" class="result off"></p>
+        <p id="round-score" class=" score off">Player: 0, Computer: 0</p>
         <button id="next-btn" class="off">Next</button>
       </div>
-
       <div id="game-over-area" class="area off">
         <h2 class="game-over-title">Game Over</h2>
-        <p id="final-result"></p>
-        <p id="final-score">Player: 0, Computer: 0</p>
+        <p id="final-result" class="result"></p>
+        <p id="final-score" class="score"></p>
         <button id="play-again">Play Again</button>
       </div>
-
     </div>
   </div>
 </body>

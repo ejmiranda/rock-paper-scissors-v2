@@ -2,6 +2,13 @@
   display: none;
 }
 
+button {
+  background-color: lightgray;
+  border: 1px solid darkgray;
+  border-radius: 4px;
+  padding: 5px 15px;
+}
+
 .selected {
-  background-color: blue;
+  background-color: darkgray;
 }

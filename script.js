@@ -2,10 +2,14 @@ const areas = document.querySelectorAll('.area');
 const startBtn = document.getElementById('start-btn');
 const roundTitle = document.getElementById('round-title');
 const options = document.querySelectorAll('.option');
-const computerSelectionPara = document.getElementById('computer-selection');
-const result = document.getElementById('result');
-const score = document.getElementById('score');
+const compSelection = document.getElementById('computer-selection');
+const roundResult = document.getElementById('round-result');
+const roundScore = document.getElementById('round-score');
 const nextBtn = document.getElementById('next-btn');
+const gameOverArea = document.getElementById('game-over-area');
+const finalResult = document.getElementById('final-result');
+const finalScore = document.getElementById('final-score');
+const playAgainBtn = document.getElementById('play-again');
 let currentRound = 0;
 let totalRounds = 0;
 let playerScore = 0;
@@ -14,31 +18,33 @@ let computerScore = 0;
 startBtn.addEventListener('click', (event) => {
   totalRounds = document.querySelector('select').value;
   enableArea('round-area');
-  startRound();
+  prepareRound();
 });
 
 options.forEach(option => {
   option.addEventListener('click', event => {
-    toggleOptionsBtns(event.target.getAttribute('id'));
+   console.log(event.target)
+    event.target.classList.add('selected');
+    toggleOptionsBtns();
     let playerSelection = event.target.getAttribute('id');
     let computerSelection = getComputerSelection();
     playRound(playerSelection, computerSelection);
   });
 })
 
-function toggleOptionsBtns() {
-  options.forEach(option => {
-    if (option.disabled === true) {
-      option.disabled = false;
-    } else {
-      option.disabled = true;
-    }
-  })
-}
-
 nextBtn.addEventListener('click', (event) => {
   toggleOptionsBtns();
-  startRound();
+  prepareRound();
+});
+
+playAgainBtn.addEventListener('click', (event) => {
+  currentRound = 0;
+  totalRounds = 0;
+  playerScore = 0;
+  computerScore = 0;
+  enableArea('intro-area');
+  document.querySelector('select').selectedIndex = 0;
+  roundScore.classList.add('off')
 });
 
 function enableArea(selectedArea) {
@@ -51,20 +57,41 @@ function enableArea(selectedArea) {
   });
 }
 
-function startRound() {
+function prepareRound() {
   currentRound++;
   if (currentRound <= totalRounds) {
     roundTitle.textContent = `Round ${currentRound} of ${totalRounds}`;
-    computerSelectionPara.classList.add('off');
-    result.classList.add('off');
+    removeOptionSelection();
+    compSelection.classList.add('off');
+    roundResult.classList.add('off');
     nextBtn.classList.add('off');
   } else {
     enableArea('game-over-area');
-    const finalScore = document.createElement('p');
-    finalScore.textContent = `Player: ${playerScore}, Computer: ${computerScore}`;
-    const gameOverArea = document.getElementById('game-over-area');
-    gameOverArea.appendChild(finalScore);
+    if (playerScore > computerScore) {
+      finalResult.textContent = 'You won the game!';
+    } else if (playerScore < computerScore) {
+      finalResult.textContent = 'You lost the game.';
+    } else {
+      finalResult.textContent = 'The game is a tie!';
+    }
+    finalScore.textContent = roundScore.textContent;
   }
+}
+
+function removeOptionSelection() {
+  options.forEach(option => {
+    option.classList.remove('selected');
+  });
+}
+
+function toggleOptionsBtns() {
+  options.forEach(option => {
+    if (option.disabled === true) {
+      option.disabled = false;
+    } else {
+      option.disabled = true;
+    }
+  });
 }
 
 function getComputerSelection() {
@@ -73,8 +100,8 @@ function getComputerSelection() {
 }
 
 function playRound(playerSelection, computerSelection) {
-  computerSelectionPara.classList.remove('off');
-  computerSelectionPara.textContent = `The computer picked ${computerSelection}.`;
+  compSelection.classList.remove('off');
+  compSelection.textContent = `The computer picked ${computerSelection}.`;
   let resultText = '';
   if (playerSelection == 'rock' && computerSelection == 'rock') {
     resultText = 'It\'s a Tie!';
@@ -100,9 +127,9 @@ function playRound(playerSelection, computerSelection) {
   } else if (resultText.includes('Lose')) {
     computerScore++;
   }
-  result.classList.remove('off');
-  result.textContent = resultText;
-  score.classList.remove('off');
-  score.textContent = `Player: ${playerScore}, Computer: ${computerScore}`;
+  roundResult.classList.remove('off');
+  roundResult.textContent = resultText;
+  roundScore.classList.remove('off');
+  roundScore.textContent = `Player: ${playerScore}, Computer: ${computerScore}`;
   nextBtn.classList.remove('off');
 }
